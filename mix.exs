@@ -1,7 +1,7 @@
 defmodule ExPesel.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.2.0"
 
   @description "Library for PESEL number."
   @repo_url "https://github.com/crabonature/ex_pesel"

@@ -46,6 +46,9 @@ defmodule ExPesel do
 
       iex> ExPesel.valid?("23455532312131123123")
       false
+
+      iex> ExPesel.valid?("some really bad data")
+      false
   """
   @spec valid?(String.t()) :: boolean()
   defdelegate valid?(pesel), to: Pesel
@@ -74,6 +77,9 @@ defmodule ExPesel do
       true
 
       iex> ExPesel.valid_with?("44051401458", {1944, 6, 13})
+      false
+
+      iex> ExPesel.valid_with?("some really bad data", {1944, 6, 13})
       false
   """
   def valid_with?(pesel, sex_or_birthday)
@@ -115,8 +121,11 @@ defmodule ExPesel do
 
       iex> ExPesel.birthdate("90720312611")
       {2290, 12, 3}
+
+      iex> ExPesel.birthdate("some really bad input")
+      :unknown
   """
-  @spec birthdate(String.t()) :: {1800..2299, 1..12, 1..31}
+  @spec birthdate(String.t()) :: {1800..2299, 1..12, 1..31} | :unknown
   defdelegate birthdate(pesel), to: Pesel
 
   @doc """
@@ -132,8 +141,11 @@ defmodule ExPesel do
 
       iex> ExPesel.sex("88122302080")
       :female
+
+      iex> ExPesel.sex("some bad input")
+      :unknown
   """
-  @spec sex(String.t()) :: :male | :female
+  @spec sex(String.t()) :: :male | :female | :unknown
   defdelegate sex(pesel), to: Pesel
 
   @doc """
@@ -146,6 +158,9 @@ defmodule ExPesel do
       true
 
       iex> ExPesel.zombie?("88122302080")
+      false
+
+      iex> ExPesel.zombie?("I'm a zombie man!")
       false
   """
   @spec zombie?(String.t()) :: boolean()

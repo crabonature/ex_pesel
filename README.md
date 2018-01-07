@@ -58,7 +58,7 @@ to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_pesel, "~> 0.1.0"}
+    {:ex_pesel, "~> 0.2.0"}
   ]
 end
 ```
