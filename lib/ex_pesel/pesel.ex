@@ -28,7 +28,7 @@ defmodule ExPesel.Pesel do
   defp extract_date({date, _}), do: date
 
   # PESEL is valid and was issued for specified birthdate
-  @spec valid_with?(String.t(), {1800..2299, 1..12, 1..3}) :: boolean()
+  @spec valid_with?(String.t(), {1800..2299, 1..12, 1..31}) :: boolean()
   def valid_with?(pesel, birthday)
   when is_binary(pesel) and is_tuple(birthday) do
     valid?(pesel) and birthdate(pesel) == birthday
@@ -48,7 +48,7 @@ defmodule ExPesel.Pesel do
   # for 2000-2099 we got addition of 20 to mm
   # for 2100-2199 we got addition of 40 to mm
   # for 2200-2299 we got addition of 60 to mm
-  @spec birthdate(String.t()) :: {1800..2299, 1..12, 1..3} | :unknown
+  @spec birthdate(String.t()) :: {1800..2299, 1..12, 1..31} | :unknown
   def birthdate(pesel), do: do_birthdate(to_list(pesel))
 
   # sorry for that but in elixir there is no multiguards
